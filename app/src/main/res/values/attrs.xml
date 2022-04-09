@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ZClockView">
+        <attr name="innerCircleColor" format="color"/>
+        <attr name="outerCircleWidth" format="dimension"/>
+        <attr name="outerCircleColor" format="color"/>
+        <attr name="centerRadius" format="dimension"/>
+        <attr name="centerCircleColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textPadding" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="bigScaleLineWidth" format="dimension"/>
+        <attr name="bigScaleLineHeight" format="dimension"/>
+        <attr name="bigScaleLineColor" format="color"/>
+        <attr name="middleScaleLineWidth" format="dimension"/>
+        <attr name="middleScaleLineHeight" format="dimension"/>
+        <attr name="middleScaleLineColor" format="color"/>
+        <attr name="smallScaleLineWidth" format="dimension"/>
+        <attr name="smallScaleLineHeight" format="dimension"/>
+        <attr name="smallScaleLineColor" format="color"/>
+        <attr name="hourPointerWidth" format="dimension"/>
+        <attr name="hourPointerColor" format="color"/>
+        <attr name="minutePointerWidth" format="dimension"/>
+        <attr name="minutePointerColor" format="color"/>
+        <attr name="secondPointerWidth" format="dimension"/>
+        <attr name="secondPointerColor" format="color"/>
+    </declare-styleable>
+</resources>
