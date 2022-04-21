@@ -110,66 +110,44 @@ public class ZClockView extends View {
 
     private void initPaint() {
         // 外圆
-        outerCirclePaint = new Paint();
-        outerCirclePaint.setAntiAlias(true);
-        outerCirclePaint.setStyle(Paint.Style.STROKE);
-        outerCirclePaint.setStrokeWidth(outerCircleWidth);
-        outerCirclePaint.setColor(outerCircleColor);
+        outerCirclePaint = createPaint(outerCircleColor, Paint.Style.FILL_AND_STROKE, outerCircleWidth, -1, null);
         // 内圆
-        innerCirclePaint = new Paint();
-        innerCirclePaint.setAntiAlias(true);
-        innerCirclePaint.setStyle(Paint.Style.FILL);
-        innerCirclePaint.setColor(innerCircleColor);
+        innerCirclePaint = createPaint(innerCircleColor, Paint.Style.FILL, -1, -1, null);
         // 圆心
-        centerCirclePaint = new Paint();
-        centerCirclePaint.setAntiAlias(true);
-        centerCirclePaint.setStyle(Paint.Style.FILL);
-        centerCirclePaint.setColor(centerCircleColor);
+        centerCirclePaint = createPaint(centerCircleColor, Paint.Style.FILL, -1, -1, null);
         // 文字画笔对象
-        textPaint = new Paint();
-        textPaint.setAntiAlias(true);
-        textPaint.setStyle(Paint.Style.FILL);
-        textPaint.setTextSize(textSize);
-        textPaint.setColor(textColor);
+        textPaint = createPaint(textColor, Paint.Style.FILL, -1, textSize, null);
         // 大刻度画笔对象
-        bigScaleLinePaint = new Paint();
-        bigScaleLinePaint.setAntiAlias(true);
-        bigScaleLinePaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        bigScaleLinePaint.setColor(bigScaleLineColor);
-        bigScaleLinePaint.setStrokeWidth(bigScaleLineWidth);
+        bigScaleLinePaint = createPaint(bigScaleLineColor, Paint.Style.FILL_AND_STROKE, bigScaleLineWidth, -1, null);
         // 中刻度画笔对象
-        middleScaleLinePaint = new Paint();
-        middleScaleLinePaint.setAntiAlias(true);
-        middleScaleLinePaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        middleScaleLinePaint.setColor(middleScaleLineColor);
-        middleScaleLinePaint.setStrokeWidth(middleScaleLineWidth);
+        middleScaleLinePaint = createPaint(middleScaleLineColor, Paint.Style.FILL_AND_STROKE, middleScaleLineWidth, -1, null);
         // 小刻度画笔对象
-        smallScaleLinePaint = new Paint();
-        smallScaleLinePaint.setAntiAlias(true);
-        smallScaleLinePaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        smallScaleLinePaint.setColor(smallScaleLineColor);
-        smallScaleLinePaint.setStrokeWidth(smallScaleLineWidth);
+        smallScaleLinePaint = createPaint(smallScaleLineColor, Paint.Style.FILL_AND_STROKE, smallScaleLineWidth, -1, null);
         // 时针画笔对象
-        hourPointerPaint = new Paint();
-        hourPointerPaint.setAntiAlias(true);
-        hourPointerPaint.setStrokeCap(Paint.Cap.ROUND);
-        hourPointerPaint.setStyle(Paint.Style.FILL);
-        hourPointerPaint.setColor(hourPointerColor);
-        hourPointerPaint.setStrokeWidth(hourPointerWidth);
+        hourPointerPaint = createPaint(hourPointerColor, Paint.Style.FILL, hourPointerWidth, -1, Paint.Cap.ROUND);
         // 分针画笔对象
-        minutePointerPaint = new Paint();
-        minutePointerPaint.setAntiAlias(true);
-        minutePointerPaint.setStrokeCap(Paint.Cap.ROUND);
-        minutePointerPaint.setStyle(Paint.Style.FILL);
-        minutePointerPaint.setColor(minutePointerColor);
-        minutePointerPaint.setStrokeWidth(minutePointerWidth);
+        minutePointerPaint = createPaint(minutePointerColor, Paint.Style.FILL, minutePointerWidth, -1, Paint.Cap.ROUND);
         // 秒针画笔对象
-        secondPointerPaint = new Paint();
-        secondPointerPaint.setAntiAlias(true);
-        secondPointerPaint.setStrokeCap(Paint.Cap.ROUND);
-        secondPointerPaint.setStyle(Paint.Style.FILL);
-        secondPointerPaint.setColor(secondPointerColor);
-        secondPointerPaint.setStrokeWidth(secondPointerColor);
+        secondPointerPaint = createPaint(secondPointerColor, Paint.Style.FILL, secondPointerWidth, -1, Paint.Cap.ROUND);
+    }
+
+    private Paint createPaint(@ColorInt int color, Paint.Style style, float strokeWidth, float textSize, Paint.Cap cap) {
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(color);
+        if (style != null) {
+            paint.setStyle(style);
+        }
+        if (strokeWidth > 0) {
+            paint.setStrokeWidth(strokeWidth);
+        }
+        if (textSize > 0) {
+            paint.setTextSize(textSize);
+        }
+        if (cap != null) {
+            paint.setStrokeCap(cap);
+        }
+        return paint;
     }
 
     @Override
