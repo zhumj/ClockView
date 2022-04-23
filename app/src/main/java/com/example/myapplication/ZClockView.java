@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -83,11 +82,15 @@ public class ZClockView extends View {
 
     private void initAttrs(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ZClockView);
-        innerCircleColor = a.getColor(R.styleable.ZClockView_innerCircleColor, Color.WHITE);
+
         outerCircleWidth = a.getDimension(R.styleable.ZClockView_outerCircleWidth, 10);
         outerCircleColor = a.getColor(R.styleable.ZClockView_outerCircleColor, Color.BLACK);
+
+        innerCircleColor = a.getColor(R.styleable.ZClockView_innerCircleColor, Color.WHITE);
+
         centerRadius = a.getDimension(R.styleable.ZClockView_centerRadius, 10);
         centerCircleColor = a.getColor(R.styleable.ZClockView_centerCircleColor, Color.GREEN);
+
         textSize = a.getDimension(R.styleable.ZClockView_textSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10,
                         getContext().getResources().getDisplayMetrics()
@@ -95,21 +98,28 @@ public class ZClockView extends View {
         );
         textPadding = a.getDimension(R.styleable.ZClockView_textPadding, 0);
         textColor = a.getColor(R.styleable.ZClockView_textColor, Color.BLACK);
+
         bigScaleLineWidth = a.getDimension(R.styleable.ZClockView_bigScaleLineWidth, 3);
         bigScaleLineHeight= a.getDimension(R.styleable.ZClockView_bigScaleLineHeight, 25);
         bigScaleLineColor = a.getColor(R.styleable.ZClockView_bigScaleLineColor, Color.BLACK);
+
         middleScaleLineWidth = a.getDimension(R.styleable.ZClockView_middleScaleLineWidth, 2);
         middleScaleLineHeight= a.getDimension(R.styleable.ZClockView_middleScaleLineHeight, 20);
         middleScaleLineColor = a.getColor(R.styleable.ZClockView_middleScaleLineColor, Color.BLACK);
+
         smallScaleLineWidth = a.getDimension(R.styleable.ZClockView_smallScaleLineWidth, 1);
         smallScaleLineHeight= a.getDimension(R.styleable.ZClockView_smallScaleLineHeight, 15);
         smallScaleLineColor = a.getColor(R.styleable.ZClockView_smallScaleLineColor, Color.RED);
+
         hourPointerWidth = a.getDimension(R.styleable.ZClockView_hourPointerWidth, 6);
         hourPointerColor = a.getColor(R.styleable.ZClockView_hourPointerColor, Color.BLACK);
+
         minutePointerWidth = a.getDimension(R.styleable.ZClockView_minutePointerWidth, 3);
         minutePointerColor = a.getColor(R.styleable.ZClockView_minutePointerColor, Color.BLACK);
+
         secondPointerWidth = a.getDimension(R.styleable.ZClockView_secondPointerWidth, 2);
         secondPointerColor = a.getColor(R.styleable.ZClockView_secondPointerColor, Color.GREEN);
+
         a.recycle();
     }
 
@@ -258,7 +268,7 @@ public class ZClockView extends View {
         int millisecond = calendar.get(Calendar.MILLISECOND);
 
         // 每隔一秒刷新一次
-        handler.sendEmptyMessageDelayed(CLOCK_STEP, CLOCK_STEP - millisecond);
+        postInvalidateDelayed(CLOCK_STEP - millisecond);
 
         // 画时针
         canvas.save();
@@ -286,13 +296,5 @@ public class ZClockView extends View {
         canvas.drawCircle(0, 0, centerRadius, centerCirclePaint);
         canvas.restore();
     }
-
-    private final Handler handler = new Handler(msg -> {
-        if (msg.what == CLOCK_STEP) {
-            invalidate();
-            return true;
-        }
-        return false;
-    });
 
 }
