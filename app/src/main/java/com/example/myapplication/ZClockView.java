@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -87,8 +88,12 @@ public class ZClockView extends View {
         outerCircleColor = a.getColor(R.styleable.ZClockView_outerCircleColor, Color.BLACK);
         centerRadius = a.getDimension(R.styleable.ZClockView_centerRadius, 10);
         centerCircleColor = a.getColor(R.styleable.ZClockView_centerCircleColor, Color.GREEN);
-        textSize = a.getDimension(R.styleable.ZClockView_textSize, 20);
-        textPadding = a.getDimension(R.styleable.ZClockView_textPadding, 10);
+        textSize = a.getDimension(R.styleable.ZClockView_textSize,
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10,
+                        getContext().getResources().getDisplayMetrics()
+                )
+        );
+        textPadding = a.getDimension(R.styleable.ZClockView_textPadding, 0);
         textColor = a.getColor(R.styleable.ZClockView_textColor, Color.BLACK);
         bigScaleLineWidth = a.getDimension(R.styleable.ZClockView_bigScaleLineWidth, 3);
         bigScaleLineHeight= a.getDimension(R.styleable.ZClockView_bigScaleLineHeight, 25);
@@ -221,7 +226,7 @@ public class ZClockView extends View {
         for (int i = 0; i< 12; i++) {
             String text = String.valueOf(i == 0 ? 12 : i);
 
-            float rR = innerRadius - bigScaleLineHeight - textPadding;
+            float rR = innerRadius - bigScaleLineHeight - textSize/2 - textPadding;
             int angle = i * 30;
             float x = 0;
             float y = 0;
